@@ -1,0 +1,40 @@
+Στην παρούσα αναφορά έχουν υιοθετηθεί οι παρακάτω συμβολισμοί.\par
+
+\newcolumntype{C}{>{\centering\arraybackslash}m{4.0cm}}
+\newcolumntype{D}{>{\centering\arraybackslash}m{5.0cm}}
+\renewcommand{\arraystretch}{1.5}
+\newcommand{\mono}[1]{$\mathtt{#1}$}
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{|D|D|}
+			\hline
+			\textbf{Συμβολισμός ψευδογλώσσας}& \textbf{Ερμηνεία}\\\hline\hline
+			\mono{a\leftarrow b}&  καταχώρηση του \mono{b} στο \mono{a}\\\hline
+			\mono{++a} & προσαύξηση του \mono{a} κατά \mono{1}\\\hline
+			\mono{\mathbf{\texttt{uint}}\;a} & μη αρνητικός ακέραιος αριθμός\\\hline
+			\mono{\mathbf{\texttt{array}}\;a} & μία μονοδοδιάστατη, zero-indexed, διατεταγμένη λίστα στοιχείων, δηλαδή ένα διάνυσμα στοιχείων\\\hline
+			\mono{arr[a:b]} & διαμέριση του πίνακα \mono{arr} στην οποία ανήκουν τα στοιχεία \mono{\left\{arr[a],\ldots,arr[b-1]\right\}} με τη σειρά που εμφανίζονται στον \mono{arr}\\\hline
+                \mono{\texttt{code}\quad//comment} & ό,τι βρίσκεται δεξιά των \mono{//} είναι σχόλιο (in-line comment)\\\hline
+		\end{tabular}
+	\end{center}
+	\vspace*{-10pt}
+	\caption{Συμβολισμοί σε περιβάλλον ψευδογλώσσας.}
+	\vspace*{+10pt}
+\end{table}
+
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{|C|C|}
+			\hline
+			\textbf{Συμβολισμός συναρτήσεων}&\textbf{Ερμηνεία}\\\hline\hline
+			$\lg{a}$ & $\log_{2}{a}$\\\hline
+			$\ln{a}$ & $\log_{e}{a}$\\\hline
+			$\log{a}$ & $\log_{10}{a}$\\\hline
+			$\left\lceil x\right\rceil$ & συνάρτηση ceiling: $\min\{n|n\geqslant x,\;\text{integer}\;n\}$ \cit{ConcreteMath}\\\hline
+			$\left\lfloor x\right\rfloor$ & συνάρτηση floor: $\max\{n|n\leqslant x,\;\text{integer}\;n\}$ \cit{ConcreteMath}\\\hline
+		\end{tabular}
+	\end{center}
+	\vspace*{-10pt}
+	\caption{Συμβολισμοί συνήθων συναρτήσεων.}
+	\vspace*{+10pt}
+\end{table}

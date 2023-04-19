@@ -1,0 +1,514 @@
+\newcommand{\emptyCell}{\textcolor{white}{X}}
+\begin{tikzpicture}[font=\ttfamily,
+	array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+	row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}}}]
+
+	\matrix[array] (array) {
+		1 & 2 & 3 & 4 & 5 & 6\\
+		1 & 0 & 3 & 1 & 3 & 1\\};
+
+	\begin{scope}[on background layer]
+	\fill[blue!20] (array-1-1.north west) rectangle (array-1-6.south east);
+	\end{scope}
+
+	\draw (array-1-1.west) node [left]{indices};
+	\draw (array-2-1.west) node [left]{$T$};
+
+\end{tikzpicture}
+
+\begin{enumerate}[label=\textbf{Βήμα \arabic*.}]
+	\item Δημιουργία και αρχικοποίηση του πίνακα $H$ σε μηδενικά --- γραμμές $1$ έως και $3$:\\\begin{center}
+		\begin{tikzpicture}[font=\ttfamily,
+			array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+			row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}}}]
+
+			\matrix[array] (array) {
+				0 & 1 & 2 & 3\\
+				0 & 0 & 0 & 0\\};
+
+			\begin{scope}[on background layer]
+			\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+			\end{scope}
+
+			\draw (array-1-1.west) node [left]{indices};
+			\draw (array-2-1.west) node [left]{$H$};
+
+		\end{tikzpicture}\end{center}
+	\item Σαρώνουμε τον πίνακα $T$ και για κάθε ακέραιο $j$ που συναντάμε αυξάνουμε κατά ένα $1$ το περιεχόμενο της θέσης του $H$ με index $T[j]$. Τελικά, σε κάθε θέση $j$ του πίνακα $H$ θα υπάρχει αποθηκευμένη η συχνότητα εμφάνισης του $j$ στον πίνακα $T$. Δηλαδή, για κάθε ακέραιο $j$ κάνουμε $H[T[j]]=H[T[j]]+1$, $j\in[1,n]$.
+		\begin{center}
+			\begin{tikzpicture}[font=\ttfamily,
+				array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+				row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+				row 1 column 2/.style={nodes={draw}}}]
+				\matrix[array] (array) {
+				0 & 1 & 2 & 3\\
+				0 & 1 & 0 & 0\\};
+				\begin{scope}[on background layer]
+					\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+				\end{scope}
+				\draw (array-1-2.north)--++(90:3mm) node [above] (second) {$T[1]$ for $j=1$};
+				\draw (array-1-1.west) node [left]{indices};
+				\draw (array-2-1.west) node [left]{$H$};
+			\end{tikzpicture}\hspace*{24pt}
+			\begin{tikzpicture}[font=\ttfamily,
+				array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+				row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+				row 1 column 1/.style={nodes={draw}}}]
+				\matrix[array] (array) {
+				0 & 1 & 2 & 3\\
+				1 & 1 & 0 & 0\\};
+				\begin{scope}[on background layer]
+					\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+				\end{scope}
+				\draw (array-1-1.north)--++(90:3mm) node [above] (first) {$T[2]$ for $j=2$};
+				\draw (array-1-1.west) node [left]{indices};
+				\draw (array-2-1.west) node [left]{$H$};
+			\end{tikzpicture}\hspace*{24pt}
+			\begin{tikzpicture}[font=\ttfamily,
+				array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+				row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+				row 1 column 4/.style={nodes={draw}}}]
+				\matrix[array] (array) {
+				0 & 1 & 2 & 3\\
+				1 & 1 & 0 & 1\\};
+				\begin{scope}[on background layer]
+					\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+				\end{scope}
+				\draw (array-1-4.north)--++(90:3mm) node [above] (fourth) {$T[3]$ for $j=3$};
+				\draw (array-1-1.west) node [left]{indices};
+				\draw (array-2-1.west) node [left]{$H$};
+			\end{tikzpicture}\\\vspace*{24pt}
+			\begin{tikzpicture}[font=\ttfamily,
+				array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+				row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+				row 1 column 2/.style={nodes={draw}}}]
+				\matrix[array] (array) {
+				0 & 1 & 2 & 3\\
+				1 & 2 & 0 & 1\\};
+				\begin{scope}[on background layer]
+					\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+				\end{scope}
+				\draw (array-1-2.north)--++(90:3mm) node [above] (second) {$T[4]$ for $j=4$};
+				\draw (array-1-1.west) node [left]{indices};
+				\draw (array-2-1.west) node [left]{$H$};
+			\end{tikzpicture}\hspace*{18pt}
+			\begin{tikzpicture}[font=\ttfamily,
+				array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+				row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+				row 1 column 4/.style={nodes={draw}}}]
+				\matrix[array] (array) {
+				0 & 1 & 2 & 3\\
+				1 & 2 & 0 & 2\\};
+				\begin{scope}[on background layer]
+					\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+				\end{scope}
+				\draw (array-1-4.north)--++(90:3mm) node [above] (T[j]) {$T[5]$ for $j=5$};
+				\draw (array-1-1.west) node [left]{indices};
+				\draw (array-2-1.west) node [left]{$H$};
+			\end{tikzpicture}
+			\begin{tikzpicture}[font=\ttfamily,
+				array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+				row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+				row 1 column 2/.style={nodes={draw}}}]
+				\matrix[array] (array) {
+				0 & 1 & 2 & 3\\
+				1 & 3 & 0 & 2\\};
+				\begin{scope}[on background layer]
+					\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+				\end{scope}
+				\draw (array-1-2.north)--++(90:3mm) node [above] (T[j]) {$T[6]$ for $j=6$};
+				\draw (array-1-1.west) node [left]{indices};
+				\draw (array-2-1.west) node [left]{$H$};
+			\end{tikzpicture}
+		\end{center}
+	\item Στον πίνακα $H$ του προηγούμενου βήματος, ξεκινώντας από την δεύτερη θέση, δηλαδή το $H[1]$, προσθέτουμε στο ήδη υπάρχον περιεχόμενο της εκάστοτε θέσης του πίνακα $H$, το περιεχόμενο της προηγούμενης θέσης (αυτός είναι και ο λόγος για τον οποίο αφήνουμε αμετάβλητο το $H[0]$) --- γραμμές $7$ έως και $9$:
+		\begin{center}
+			\begin{tikzpicture}[font=\ttfamily,
+				array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+				row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+				row 1 column 2/.style={nodes={draw}}}]
+				\matrix[array] (array) {
+				0 & 1 & 2 & 3\\
+				1 & 3+1 & 0 & 2\\};
+				\begin{scope}[on background layer]
+					\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+				\end{scope}
+				\draw (array-1-2.north)--++(90:3mm) node [above] (second) {$i=1$};
+				\draw (array-1-1.west) node [left]{indices};
+				\draw (array-2-1.west) node [left]{$H$};
+			\end{tikzpicture}\hspace*{24pt}
+			\begin{tikzpicture}[font=\ttfamily,
+				array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+				row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+				row 1 column 2/.style={nodes={draw}}}]
+				\matrix[array] (array) {
+				0 & 1 & 2 & 3\\
+				1 & 4 & 0+4 & 2\\};
+				\begin{scope}[on background layer]
+					\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+				\end{scope}
+				\draw (array-1-2.north)--++(90:3mm) node [above] (first) {$i=2$};
+				\draw (array-1-1.west) node [left]{indices};
+				\draw (array-2-1.west) node [left]{$H$};
+			\end{tikzpicture}\hspace*{24pt}
+			\begin{tikzpicture}[font=\ttfamily,
+				array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+				row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+				row 1 column 4/.style={nodes={draw}}}]
+				\matrix[array] (array) {
+				0 & 1 & 2 & 3\\
+				1 & 4 & 4 & 2+4\\};
+				\begin{scope}[on background layer]
+					\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+				\end{scope}
+				\draw (array-1-4.north)--++(90:3mm) node [above] (fourth) {$i=3$};
+				\draw (array-1-1.west) node [left]{indices};
+				\draw (array-2-1.west) node [left]{$H$};
+			\end{tikzpicture}
+		\end{center}
+		Τελικά, θα είναι
+		\begin{center}
+			\begin{tikzpicture}[font=\ttfamily,
+				array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+				row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}}}]
+				\matrix[array] (array) {
+				0 & 1 & 2 & 3\\
+				1 & 4 & 4 & 6\\};
+				\begin{scope}[on background layer]
+					\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+				\end{scope}
+				\draw (array-1-1.west) node [left]{indices};
+				\draw (array-2-1.west) node [left]{$H$};
+			\end{tikzpicture}
+		\end{center}
+		Η νέα μορφή του πίνακα $H$ μας δίνει την πληροφορία \textsl{σε ποια θέση του ταξινομημένου πίνακα θα τοποθετήσουμε για τελευταία φορά\footnote{Με την έκφραση \textsl{«τελευταία φορά»} εννοούμε πως στην περίπτωση όπου κάποιος ακέραιος, $x$, εμφανίζεται στον $T$ περισσότερες από μία φορές, τότε το στοιχείο με τιμή $x$ το οποίο έχει μεγαλύτερο index στον $T$ από όλα τα υπόλοιπα στοιχεία του $T$ με τιμή $x$, θα εμφανιστεί στον $S$ στην θέση--index που του αντιστοιχεί σύμφωνα με τον $H$ μετά το πέρας του \textbf{Βήματος 3}.} κάθε ακέραιο (index του πίνακα $H$).}\newpage
+	\item Σε έναν νέο πίνακα $S$, μεγέθους $n$, αποθηκεύουμε το ταξινομημένο αποτέλεσμα. Ο μετρητής του βρόχου επανάληψης των γραμμών $10$ έως και $13$ ξεκινάει από το $n$ και μειώνεται έως και την τιμή $1$. Χρησιμοποιούμε ως δείκτη για την πρόσβαση στον πίνακα $H$ την τιμή που είναι αποθηκευμένη στο $T[j]$, δηλαδή διαβάζουμε την τιμή $H[T[j]]$ η οποία μας δίνει την θέση της τελευταίας εμφάνισης του ακεραίου $T[j]$ στον ταξινομημένο πίνακα $S$ (σε κάθε iteration). Επομένως, θα είναι $S[H[T[j]]]=T[j]$.
+
+		\begin{itemize}
+			\item $j=6$:
+				\begin{center}
+					\begin{tikzpicture}[font=\ttfamily,
+						array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+						row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+						row 1 column 6/.style={nodes={draw}}}]
+						\matrix[array] (array) {
+						1 & 2 & 3 & 4 & 5 & 6\\
+						1 & 0 & 3 & 1 & 3 & 1\\};
+						\begin{scope}[on background layer]
+							\fill[blue!20] (array-1-1.north west) rectangle (array-1-6.south east);
+						\end{scope}
+						\draw (array-1-6.north)--++(90:3mm) node [above] (fourth) {$j=6$};
+						\draw (array-1-1.west) node [left]{indices};
+						\draw (array-2-1.west) node [left]{$T$};
+					\end{tikzpicture}\hspace*{24pt}
+					\begin{tikzpicture}[font=\ttfamily,
+						array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+						row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+						row 1 column 2/.style={nodes={draw}}}]
+						\matrix[array] (array) {
+						0 & 1 & 2 & 3\\
+						1 & 4 & 4 & 6\\};
+						\begin{scope}[on background layer]
+							\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+						\end{scope}
+						\draw (array-1-2.north)--++(90:3mm) node [above] (fourth) {$T[6]$};
+						\draw (array-1-1.west) node [left]{indices};
+						\draw (array-2-1.west) node [left]{$H$};
+					\end{tikzpicture}\\\vspace*{18pt}\begin{tikzpicture}[font=\ttfamily,
+						array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+						row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+						nodes in empty cells,
+						row 2/.style={nodes={draw, fill=white, minimum size=6mm}},
+						row 1 column 4/.style={nodes={draw}}}]
+						\matrix[array] (array) {
+						1 & 2 & 3 & 4 & 5 & 6\\
+						\emptyCell&\emptyCell&\emptyCell&1&\emptyCell&\emptyCell\\};
+						\begin{scope}[on background layer]
+							\fill[green!20] (array-1-1.north west) rectangle (array-1-6.south east);
+						\end{scope}
+						\draw (array-1-4.north)--++(90:3mm) node [above] (fourth) {$j=6:H[T[6]]$};
+						\draw (array-1-1.west) node [left]{indices};
+						\draw (array-2-1.west) node [left]{$S$};
+					\end{tikzpicture}
+				\end{center}
+				Αφού τοποθετήσουμε τον πρώτο ακέραιο στον ταξινομημένο πίνακα $S$ πρέπει να μειώσουμε το περιεχόμενο στην αντίστοιχη καταχώρηση του $H$ κατά $1$, διότι την επόμενη φορά που θα συναντήσουμε τον συγκεκριμένο ακέραιο στον πίνακα $T$ θα πρέπει να τοποθετηθεί στην αμέσως προηγούμενη θέση στον $S$. Δηλαδή, η νέα μορφή του $H$ είναι
+				\begin{center}
+					\begin{tikzpicture}[font=\ttfamily,
+						array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=none},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+						row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}}}]
+						\matrix[array] (array) {
+						0 & 1 & 2 & 3\\
+						1 & 4-1 & 4 & 6\\};
+						\begin{scope}[on background layer]
+							\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+						\end{scope}
+						\draw (array-1-1.west) node [left]{indices};
+						\draw (array-2-1.west) node [left]{$H$};
+					\end{tikzpicture}
+				\end{center}
+			\item $j=5$:
+				\begin{center}
+					\begin{tikzpicture}[font=\ttfamily,
+						array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+						row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+						row 1 column 5/.style={nodes={draw}}}]
+						\matrix[array] (array) {
+						1 & 2 & 3 & 4 & 5 & 6\\
+						1 & 0 & 3 & 1 & 3 & 1\\};
+						\begin{scope}[on background layer]
+							\fill[blue!20] (array-1-1.north west) rectangle (array-1-6.south east);
+						\end{scope}
+						\draw (array-1-5.north)--++(90:3mm) node [above] (fourth) {$j=5$};
+						\draw (array-1-1.west) node [left]{indices};
+						\draw (array-2-1.west) node [left]{$T$};
+					\end{tikzpicture}\hspace*{24pt}
+					\begin{tikzpicture}[font=\ttfamily,
+						array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+						row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+						row 1 column 4/.style={nodes={draw}}}]
+						\matrix[array] (array) {
+						0 & 1 & 2 & 3\\
+						1 & 3 & 4 & 6\\};
+						\begin{scope}[on background layer]
+							\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+						\end{scope}
+						\draw (array-1-4.north)--++(90:3mm) node [above] (fourth) {$T[5]$};
+						\draw (array-1-1.west) node [left]{indices};
+						\draw (array-2-1.west) node [left]{$H$};
+					\end{tikzpicture}\\\vspace*{18pt}\begin{tikzpicture}[font=\ttfamily,
+						array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+						row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+						nodes in empty cells,
+						row 2/.style={nodes={draw, fill=white, minimum size=6mm}},
+						row 1 column 6/.style={nodes={draw}}}]
+						\matrix[array] (array) {
+						1 & 2 & 3 & 4 & 5 & 6\\
+						\emptyCell&\emptyCell&\emptyCell&1&\emptyCell&3\\};
+						\begin{scope}[on background layer]
+							\fill[green!20] (array-1-1.north west) rectangle (array-1-6.south east);
+						\end{scope}
+						\draw (array-1-6.north)--++(90:3mm) node [above] (fourth) {$j=5:H[T[5]]$};
+						\draw (array-1-1.west) node [left]{indices};
+						\draw (array-2-1.west) node [left]{$S$};
+					\end{tikzpicture}
+				\end{center}
+
+			\item $j=4$:
+			\begin{center}
+				\begin{tikzpicture}[font=\ttfamily,
+					array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+					row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+					row 1 column 4/.style={nodes={draw}}}]
+					\matrix[array] (array) {
+					1 & 2 & 3 & 4 & 5 & 6\\
+					1 & 0 & 3 & 1 & 3 & 1\\};
+					\begin{scope}[on background layer]
+						\fill[blue!20] (array-1-1.north west) rectangle (array-1-6.south east);
+					\end{scope}
+					\draw (array-1-4.north)--++(90:3mm) node [above] (fourth) {$j=4$};
+					\draw (array-1-1.west) node [left]{indices};
+					\draw (array-2-1.west) node [left]{$T$};
+				\end{tikzpicture}\hspace*{24pt}
+				\begin{tikzpicture}[font=\ttfamily,
+					array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+					row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+					row 1 column 2/.style={nodes={draw}}}]
+					\matrix[array] (array) {
+					0 & 1 & 2 & 3\\
+					1 & 3 & 4 & 5\\};
+					\begin{scope}[on background layer]
+						\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+					\end{scope}
+					\draw (array-1-2.north)--++(90:3mm) node [above] (fourth) {$T[4]$};
+					\draw (array-1-1.west) node [left]{indices};
+					\draw (array-2-1.west) node [left]{$H$};
+				\end{tikzpicture}\\\vspace*{18pt}\begin{tikzpicture}[font=\ttfamily,
+					array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+					row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+					nodes in empty cells,
+					row 2/.style={nodes={draw, fill=white, minimum size=6mm}},
+					row 1 column 3/.style={nodes={draw}}}]
+					\matrix[array] (array) {
+					1 & 2 & 3 & 4 & 5 & 6\\
+					\emptyCell&\emptyCell&1&1&\emptyCell&3\\};
+					\begin{scope}[on background layer]
+						\fill[green!20] (array-1-1.north west) rectangle (array-1-6.south east);
+					\end{scope}
+					\draw (array-1-3.north)--++(90:3mm) node [above] (fourth) {$j=4:H[T[4]]$};
+					\draw (array-1-1.west) node [left]{indices};
+					\draw (array-2-1.west) node [left]{$S$};
+				\end{tikzpicture}
+			\end{center}\newpage
+			\item $j=3$:
+			\begin{center}
+				\begin{tikzpicture}[font=\ttfamily,
+					array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+					row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+					row 1 column 3/.style={nodes={draw}}}]
+					\matrix[array] (array) {
+					1 & 2 & 3 & 4 & 5 & 6\\
+					1 & 0 & 3 & 1 & 3 & 1\\};
+					\begin{scope}[on background layer]
+						\fill[blue!20] (array-1-1.north west) rectangle (array-1-6.south east);
+					\end{scope}
+					\draw (array-1-3.north)--++(90:3mm) node [above] (fourth) {$j=3$};
+					\draw (array-1-1.west) node [left]{indices};
+					\draw (array-2-1.west) node [left]{$T$};
+				\end{tikzpicture}\hspace*{24pt}
+				\begin{tikzpicture}[font=\ttfamily,
+					array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+					row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+					row 1 column 4/.style={nodes={draw}}}]
+					\matrix[array] (array) {
+					0 & 1 & 2 & 3\\
+					1 & 2 & 4 & 5\\};
+					\begin{scope}[on background layer]
+						\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+					\end{scope}
+					\draw (array-1-4.north)--++(90:3mm) node [above] (fourth) {$T[3]$};
+					\draw (array-1-1.west) node [left]{indices};
+					\draw (array-2-1.west) node [left]{$H$};
+				\end{tikzpicture}\\\vspace*{18pt}\begin{tikzpicture}[font=\ttfamily,
+					array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+					row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+					nodes in empty cells,
+					row 2/.style={nodes={draw, fill=white, minimum size=6mm}},
+					row 1 column 5/.style={nodes={draw}}}]
+					\matrix[array] (array) {
+					1 & 2 & 3 & 4 & 5 & 6\\
+					\emptyCell&\emptyCell&1&1&3&3\\};
+					\begin{scope}[on background layer]
+						\fill[green!20] (array-1-1.north west) rectangle (array-1-6.south east);
+					\end{scope}
+					\draw (array-1-5.north)--++(90:3mm) node [above] (fourth) {$j=3:H[T[3]]$};
+					\draw (array-1-1.west) node [left]{indices};
+					\draw (array-2-1.west) node [left]{$S$};
+				\end{tikzpicture}
+			\end{center}
+			\item $j=2$:
+			\begin{center}
+				\begin{tikzpicture}[font=\ttfamily,
+					array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+					row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+					row 1 column 2/.style={nodes={draw}}}]
+					\matrix[array] (array) {
+					1 & 2 & 3 & 4 & 5 & 6\\
+					1 & 0 & 3 & 1 & 3 & 1\\};
+					\begin{scope}[on background layer]
+						\fill[blue!20] (array-1-1.north west) rectangle (array-1-6.south east);
+					\end{scope}
+					\draw (array-1-2.north)--++(90:3mm) node [above] (fourth) {$j=2$};
+					\draw (array-1-1.west) node [left]{indices};
+					\draw (array-2-1.west) node [left]{$T$};
+				\end{tikzpicture}\hspace*{24pt}
+				\begin{tikzpicture}[font=\ttfamily,
+					array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+					row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+					row 1 column 1/.style={nodes={draw}}}]
+					\matrix[array] (array) {
+					0 & 1 & 2 & 3\\
+					1 & 2 & 4 & 4\\};
+					\begin{scope}[on background layer]
+						\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+					\end{scope}
+					\draw (array-1-1.north)--++(90:3mm) node [above] (fourth) {$T[2]$};
+					\draw (array-1-1.west) node [left]{indices};
+					\draw (array-2-1.west) node [left]{$H$};
+				\end{tikzpicture}\\\vspace*{18pt}\begin{tikzpicture}[font=\ttfamily,
+					array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+					row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+					nodes in empty cells,
+					row 2/.style={nodes={draw, fill=white, minimum size=6mm}},
+					row 1 column 1/.style={nodes={draw}}}]
+					\matrix[array] (array) {
+					1 & 2 & 3 & 4 & 5 & 6\\
+					0&\emptyCell&1&1&3&3\\};
+					\begin{scope}[on background layer]
+						\fill[green!20] (array-1-1.north west) rectangle (array-1-6.south east);
+					\end{scope}
+					\draw (array-1-1.north)--++(90:3mm) node [above] (fourth) {$j=2:H[T[2]]$};
+					\draw (array-1-1.west) node [left]{indices};
+					\draw (array-2-1.west) node [left]{$S$};
+				\end{tikzpicture}
+			\end{center}
+			\item $j=1$:
+			\begin{center}
+				\begin{tikzpicture}[font=\ttfamily,
+					array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+					row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+					row 1 column 1/.style={nodes={draw}}}]
+					\matrix[array] (array) {
+					1 & 2 & 3 & 4 & 5 & 6\\
+					1 & 0 & 3 & 1 & 3 & 1\\};
+					\begin{scope}[on background layer]
+						\fill[blue!20] (array-1-1.north west) rectangle (array-1-6.south east);
+					\end{scope}
+					\draw (array-1-1.north)--++(90:3mm) node [above] (fourth) {$j=1$};
+					\draw (array-1-1.west) node [left]{indices};
+					\draw (array-2-1.west) node [left]{$T$};
+				\end{tikzpicture}\hspace*{24pt}
+				\begin{tikzpicture}[font=\ttfamily,
+					array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+					row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+					row 1 column 2/.style={nodes={draw}}}]
+					\matrix[array] (array) {
+					0 & 1 & 2 & 3\\
+					0 & 2 & 4 & 4\\};
+					\begin{scope}[on background layer]
+						\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+					\end{scope}
+					\draw (array-1-2.north)--++(90:3mm) node [above] (fourth) {$T[1]$};
+					\draw (array-1-1.west) node [left]{indices};
+					\draw (array-2-1.west) node [left]{$H$};
+				\end{tikzpicture}\\\vspace*{18pt}\begin{tikzpicture}[font=\ttfamily,
+					array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+					row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+					nodes in empty cells,
+					row 2/.style={nodes={draw, fill=white, minimum size=6mm}},
+					row 1 column 2/.style={nodes={draw}}}]
+					\matrix[array] (array) {
+					1 & 2 & 3 & 4 & 5 & 6\\
+					0&1&1&1&3&3\\};
+					\begin{scope}[on background layer]
+						\fill[green!20] (array-1-1.north west) rectangle (array-1-6.south east);
+					\end{scope}
+					\draw (array-1-2.north)--++(90:3mm) node [above] (fourth) {$j=1:H[T[1]]$};
+					\draw (array-1-1.west) node [left]{indices};
+					\draw (array-2-1.west) node [left]{$S$};
+				\end{tikzpicture}
+			\end{center}
+		\end{itemize}
+		Τελικά, ο πίνακας $H$ είναι
+		\begin{center}
+			\begin{tikzpicture}[font=\ttfamily,
+				array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+				row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}}}]
+				\matrix[array] (array) {
+				0 & 1 & 2 & 3\\
+				0 & 1 & 4 & 4\\};
+				\begin{scope}[on background layer]
+					\fill[red!20] (array-1-1.north west) rectangle (array-1-4.south east);
+				\end{scope}
+				\draw (array-1-1.west) node [left]{indices};
+				\draw (array-2-1.west) node [left]{$H$};
+			\end{tikzpicture}
+		\end{center}
+		και ο ταξινομημένος πίνακας $S$ είναι
+		\begin{center}
+			\begin{tikzpicture}[font=\ttfamily,
+				array/.style={matrix of nodes,nodes={draw, minimum size=6mm, fill=white},column sep=-\pgflinewidth, row sep=0.75mm, nodes in empty cells,
+				row 1/.style={nodes={draw=none, fill=none, minimum size=4mm}},
+				nodes in empty cells,
+				row 2/.style={nodes={draw, fill=white, minimum size=6mm}}}]
+				\matrix[array] (array) {
+				1 & 2 & 3 & 4 & 5 & 6\\
+				0&1&1&1&3&3\\};
+				\begin{scope}[on background layer]
+					\fill[green!20] (array-1-1.north west) rectangle (array-1-6.south east);
+				\end{scope}
+				\draw (array-1-1.west) node [left]{indices};
+				\draw (array-2-1.west) node [left]{$S$};
+			\end{tikzpicture}
+		\end{center}
+\end{enumerate}
+\vspace*{18pt}

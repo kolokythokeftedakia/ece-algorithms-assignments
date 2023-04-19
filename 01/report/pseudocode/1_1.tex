@@ -1,0 +1,23 @@
+\begin{algorithm}[H]
+	\caption{An algorithm of time complexity $\bigO(n^2)$ that checks whether or not any of the candidates has gathered more than half of the votes. The following procedure takes as input an array $\mathtt{C}$ containing the names of the candidates and an array $\mathtt{P}$ containing the vote -- according to the gallop -- of every citizen.}\label{alg:1_1}
+	\texttt{\begin{algorithmic}[1]
+		\Procedure{MAIN}{$\mathbf{array}\;\mathtt{C},\;\mathbf{array}\;\mathtt{P}$}
+			\State{$\mathbf{array}\;\mathtt{POP\_CAND}\leftarrow\emptyset\quad$ //empty array}
+			\ForAll{$\mathtt{candidate\in C}$}
+				\State{$\mathtt{popularity\leftarrow 0}$}
+				\ForAll{$\mathtt{citizen\in P}$}
+					\If{$\(\mathtt{P[citizen]==candidate}\)$}
+						\State{$\mathtt{++popularity}$}
+					\EndIf
+				\EndFor
+				\If{$\(\mathtt{popularity>\left\lceil\frac{P.length()}{2}\right\rceil}\)$}
+						\State{$\mathtt{POP\_CAND.append(candidate)}$}
+						\State
+						\Return $\mathtt{POP\_CAND}$
+					\EndIf
+			\EndFor
+			\State
+			\Return $\mathtt{POP\_CAND}$
+		\EndProcedure
+	\end{algorithmic}}
+\end{algorithm}

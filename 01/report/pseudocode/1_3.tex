@@ -1,0 +1,25 @@
+\begin{algorithm}[H]
+	\caption{An algorithm of time complexity $\bigO(n)$ that checks whether or not any of the candidates has gathered more than half of the votes. The procedure \texttt{MAIN} takes as input an array $\mathtt{C}$ containing the names of the candidates and an array $\mathtt{P}$ containing the vote -- according to the gallop -- of every citizen.}\label{alg:1_3}
+	\texttt{\begin{algorithmic}[1]
+		\Procedure{MAIN}{$\mathbf{array}\;\mathtt{C},\;\mathbf{array}\;\mathtt{P}$}
+			\State{$\mathbf{dictionary}\;\mathtt{D:\left\langle \mathbf{string}\;key, \mathbf{uint}\;value\right\rangle\leftarrow\emptyset}$}
+			\ForAll{$\mathtt{candidate\in C}$}
+				\State{$\mathtt{D.append\left\langle candidate,0\right\rangle}$}
+			\EndFor
+			\State{$\mathbf{array}\;\mathtt{POP\_CAND\leftarrow\emptyset}$}
+			\ForAll{$\mathtt{citizen\in P}$}
+				\State{$\mathtt{++D[P[citizen]]}$}
+			\EndFor
+			\State{$\mathtt{half\_v\leftarrow\left\lceil\frac{P.length()}{2}\right\rceil}$}
+			\ForAll{$\mathtt{candidate\in C}$}
+				\If{$\(\mathtt{D[candidate]> half\_v}\)$}
+					\State{$\mathtt{POP\_CAND.append(candidate)}$}
+					\State
+					\Return{$\mathtt{POP\_CAND}$}
+				\EndIf
+			\EndFor
+			\State
+			\Return{$\mathtt{POP\_CAND}$}
+		\EndProcedure
+	\end{algorithmic}}
+\end{algorithm}

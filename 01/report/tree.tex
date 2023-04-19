@@ -1,0 +1,17 @@
+\begin{center}
+\begin{forest}
+	for tree={s sep=4pt},
+	[$\tau \cdot N$
+		[$\displaystyle{\tau \cdot \left\lceil\sfrac{N}{2}\right\rceil}$
+			[$\displaystyle{\tau \cdot \left\lceil\sfrac{N}{4}\right\rceil}$
+				[$\vdots$[$\tau \cdot 1$]][$\vdots$[$\tau \cdot 1$]]]
+			[$\displaystyle{\tau \cdot \left\lfloor\sfrac{N}{4}\right\rfloor}$
+				[$\vdots$[$\tau \cdot 1$]][$\vdots$[$\tau \cdot 1$]]]]
+		[$\displaystyle{\tau \cdot \left\lfloor\sfrac{N}{2}\right\rfloor}$
+			[$\displaystyle{\tau \cdot \left\lceil\sfrac{N}{4}\right\rceil}$
+				[$\vdots$[$\tau \cdot 1$]][$\vdots$[$\tau \cdot 1$]]]
+			[$\displaystyle{\tau \cdot \left\lfloor\sfrac{N}{4}\right\rfloor}$
+				[$\vdots$[\ldots]][$\vdots$[$\tau \cdot 1$]]]]
+	]
+\end{forest}
+\end{center}

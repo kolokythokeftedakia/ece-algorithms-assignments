@@ -1,0 +1,37 @@
+\newcommand{\reporttitle}{Πρώτη Εργασία --- Διαίρει \& Βασίλευε}
+\newcommand{\reportauthorOne}{Καπετάνιος Αντώνιος}
+\newcommand{\cidOne}{10417}
+\newcommand{\reportauthorTwo}{Κολιαμήτρα, Ελευθερία}
+\newcommand{\cidTwo}{10422}
+\newcommand{\reportauthorThree}{Μπαξεβάνης Γεώργιος}
+\newcommand{\cidThree}{10301}
+
+\bibliographystyle{ieeetr}
+
+\input{preamble}
+\setcounter{secnumdepth}{-1}
+
+\begin{document}
+
+	\pagenumbering{alph}
+	\input{titlepage}
+
+	\pagenumbering{roman}
+	\gr{\tableofcontents}
+	\newpage
+	\chapter{Συμβολισμοί}
+	\input{notation.tex}
+	\newpage
+
+	\pagenumbering{arabic}
+	\chapter{Πρόβλημα 1}
+		\input{problem1}
+	\newpage
+	\chapter{Πρόβλημα 2}
+        \input{problem2}
+
+	\newpage
+	\printbibliography
+	\addcontentsline{toc}{chapter}{Βιβλιογραφία}
+
+\end{document}

@@ -1,0 +1,79 @@
+\documentclass[9pt,a4paper]{report}
+\usepackage[fontsize=9pt]{scrextend}
+\usepackage[portrait,textwidth=14.2cm,vmargin=2cm,includeheadfoot]{geometry}
+\usepackage{amsmath,amsfonts,amssymb,mathtools,xfrac}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx,longtable,multirow,subfigure,caption}
+\usepackage[english,main=greek]{babel}
+\usepackage{csquotes}
+\newcommand{\en}[1]{\foreignlanguage{english}{#1}}
+\newcommand{\gr}[1]{\foreignlanguage{greek}{#1}}
+\usepackage{amsmath,amsfonts,amssymb,mathtools,xfrac,halloweenmath}
+\usepackage[LGR]{fontenc}
+\usepackage{fontspec}
+\usepackage[normalize-symbols]{textalpha}
+\usepackage{unicode-math}
+\setmathfont{Concrete-Math.otf}
+\setmainfont{GFS NeoHellenic}
+\usepackage{indentfirst}
+\usepackage{tcolorbox}
+\usepackage{ifxetex}
+\usepackage{stackengine}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[language=greek,bibencoding=utf8,backend=biber]{biblatex}
+\addbibresource{references.bib}
+\usepackage{array}
+\usepackage{forest}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage[unicode,luatex,hidelinks]{hyperref}
+\hypersetup{pdfsubject={Divide and conquer},
+  pdfauthor={\reportauthorOne (\cidOne), \reportauthorTwo (\cidTwo), \reportauthorThree (\cidThree)},
+  bookmarksnumbered=true,
+  bookmarksopen=true}
+\usepackage[all]{hypcap}
+\usepackage{tikz}
+\usetikzlibrary{matrix,backgrounds}
+
+% =====================================================================================================
+
+\newtheorem{theorem}{Θεώρημα}
+\newtheorem{problem}{Πρόβλημα}
+\newtheorem{definition}{Ορισμός}
+\newcommand{\cit}[1]{\textnormal{\textcolor{darkgray}{\small\cite{#1}}}}
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\newcommand{\dnc}{\textsl{Διαίρει \& Βασίλευε}}
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand{\qed}{{\hfill\raggedright$\blacksquare$\par}}
+\setlength{\headheight}{14.5pt}
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\footrulewidth}{0.1pt}
+\captionsetup{margin=10pt,font=small,labelfont=bf}
+
+\renewcommand{\labelenumii}{\roman{enumi}.\roman{enumii}}
+\renewcommand{\labelenumiii}{\roman{enumi}.\roman{enumii}.\roman{enumiii}}
+\renewcommand{\labelenumiv}{\roman{enumi}.\roman{enumii}.\roman{enumiii}.\roman{enumiv}}
+
+%--- chapter heading
+
+\fancypagestyle{fancy}{
+	\fancyhf{}
+	\fancyfoot[LE,RO]{\thepage}
+	\fancyfoot[RE,LO]{\leftmark}
+    \renewcommand{\footrule}{\hbox to \headwidth{\color{gray}\leaders\hrule height \footrulewidth\hfill}}
+	\renewcommand{\footrulewidth}{0.2pt}
+}
+
+\fancypagestyle{plain}{
+	\fancyhf{}
+	\fancyfoot[LE,RO]{\thepage}
+    \renewcommand{\footrule}{\hbox to \headwidth{\color{gray}\leaders\hrule height \footrulewidth\hfill}}
+	\renewcommand{\footrulewidth}{0.2pt}
+}
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
