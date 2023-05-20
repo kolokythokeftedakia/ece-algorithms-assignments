@@ -1,0 +1,78 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[portrait,textwidth=18cm,vmargin=1.4cm,includeheadfoot]{geometry}
+\usepackage{amsmath,amsfonts,amssymb,mathtools,xfrac}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx,longtable,multirow,subfigure,caption}
+\usepackage[english,main=greek]{babel}
+\usepackage[LGR]{fontenc}
+\usepackage{fontspec}
+\usepackage[normalize-symbols]{textalpha}
+\usepackage{unicode-math}
+\setmathfont{Concrete-Math.otf}
+\setmainfont{GFS NeoHellenic}
+\usepackage{indentfirst}
+\usepackage{tcolorbox}
+\usepackage{ifxetex}
+\usepackage{stackengine}
+\usepackage[ruled]{algorithm}
+\usepackage[noEnd=true,indLines=true]{algpseudocodex}
+\usepackage{array}
+\usepackage{forest}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage[unicode,luatex,hidelinks]{hyperref}
+\hypersetup{pdftitle={Team 31 Assignment 2},
+			pdfsubject={Dynamic programming},
+			pdfauthor={\reportauthorOne~(\cidOne), \reportauthorTwo~(\cidTwo), \reportauthorThree~(\cidThree)},
+			bookmarksnumbered=true,
+			bookmarksopen=true,
+			pdfstartview=Fit}
+\usepackage[all]{hypcap}
+\usepackage{tikz}
+\usetikzlibrary{matrix,backgrounds}
+\usepackage{multicol}
+\usepackage[language=greek,bibencoding=utf8,backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+% =====================================================================================================
+
+\newtheorem{theorem}{Θεώρημα}
+\newtheorem{problem}{Πρόβλημα}
+\newtheorem{definition}{Ορισμός}
+\newtheorem{proposition}{Πρόταση}
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand{\qed}{{\hfill\raggedright$\blacksquare$\par}}
+\newcommand{\tw}[1]{\text{{#1}}}
+\setlength{\headheight}{14.5pt}
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\footrulewidth}{0.1pt}
+\captionsetup{margin=10pt,font=small,labelfont=bf}
+\newcommand{\typeID}[1]{\textbf{{#1}}}
+\newcommand{\nil}{{\textbf{NIL}}}
+\newcommand{\AND}{{\textbf{AND}}}
+\newcommand{\cit}[1]{\textnormal{\textcolor{darkgray}{\textsuperscript{\small\cite{#1}}}}}
+\AtBeginBibliography{\footnotesize}
+
+%--- chapter heading
+
+\fancypagestyle{fancy}{
+	\fancyhf{}
+	\fancyfoot[R]{\thepage}
+	\fancyfoot[L]{Ομάδα 31}
+    \renewcommand{\footrule}{\hbox to \headwidth{\color{gray}\leaders\hrule height \footrulewidth\hfill}}
+	\renewcommand{\footrulewidth}{0.2pt}
+}
+
+\fancypagestyle{plain}{
+	\fancyhf{}
+	\fancyfoot[R]{\thepage}
+    \renewcommand{\footrule}{\hbox to \headwidth{\color{gray}\leaders\hrule height \footrulewidth\hfill}}
+	\renewcommand{\footrulewidth}{0.2pt}
+}
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}

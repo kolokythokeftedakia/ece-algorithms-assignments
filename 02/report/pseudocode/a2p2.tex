@@ -1,0 +1,23 @@
+\vspace*{-11pt}
+\begin{algorithm}[H]
+	\caption{The procedure takes as input an array $p$ of size $n$ containing the expected profit of each of the possible locations, an array $m$ of size $n$ containing the distance of each possible location from a fixed origin point and a positive real constant $k$.}\label{alg:2_2}
+	\begin{algorithmic}[1]
+		\Procedure{RESTAURANTS}{$p[n],m[n],k$}
+			\State{$\typeID{int}\;n\gets\tw{length\_of}(p)$}
+			\State{$\typeID{array}\;R[1,\ldots,n]\gets\emptyset$}
+			\ForAll{$p_i\in p$}
+				\State{$R[p_i]\gets p_i$}
+			\EndFor
+			\For{$i=[2,n]$}
+				\For{$j=[1,i)$}
+					\If{$m[i]-m[j]\geqslant k$}
+						\State{$R[i]\gets \max{\left\{p[i], R[j]+p[i]\right\}}$}
+					\Else
+						\State{$R[i]\gets \max{\left\{R[i], R[j]\right\}}$}
+					\EndIf
+				\EndFor
+			\EndFor
+			\State{\Return{$R[n]$}}
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}

@@ -1,0 +1,46 @@
+\vspace*{-11pt}
+\begin{algorithm}[H]
+	% The procedure takes as input a weighted graph $G=(V,E)$ in represented by the adjacancy lists of its vertices, a vertex $s$ as the source point of the path, a vertex $t$ as the terminal point of the path and the weight function of the edges $w:E\to[0,1]$.
+	\caption{The algorithm is based on Dijktstra's algorithm implementation by T. H. Cormen and C. E. Leiserson and R. L. Rivest and C. Stein \cit{handbook}.}\label{alg:2_1}
+	\begin{algorithmic}[1]
+		\Procedure{MAXPP}{$G,s,t,w$}
+			\ForAll{$e\in E$}
+				\State{$w(e)\leftarrow 1.0-w(e)$}
+			\EndFor
+			\State{$\typeID{FibonacciHeap}\;\mathcal{F}\leftarrow\emptyset$}
+			\State{$\typeID{array}\;\mathcal{P}\leftarrow\emptyset$}
+			\State{$\typeID{array}\;\pi\leftarrow\emptyset\cdot|V|$}
+			\State{$\typeID{array}\;\mathcal{L}\leftarrow\emptyset\cdot|V|$}
+			\State{$\pi [s]\leftarrow \nil$}
+			\State{$\mathcal{L}[s]\leftarrow 0$}
+			\ForAll{$v\in V-\{s\}$}
+				\State{$\pi[v]\leftarrow \nil$}
+				\State{$\mathcal{L}[v]\leftarrow 1.0$}
+			\EndFor
+			\ForAll{$v\in V$}
+				\State{$\mathcal{F}.\tw{insert}(v,\mathcal{L}[v])$}
+			\EndFor
+			\While{$\mathcal{F}\neq\emptyset$}
+				\State{$u\leftarrow \mathcal{F}.\tw{extract\_min()}$}
+				\State{$\mathcal{P}\leftarrow\mathcal{P}\cup\{u\}$}
+				\ForAll{$v\in u.\tw{AdjLst}\;\AND\;u\neq s$}
+					\If{$\mathcal{L}[v]>\mathcal{L}[u]\cdot w(u,v)$}
+						\State{$\mathcal{L}[v]\leftarrow \mathcal{L}[u]\cdot w(u,v)$}
+						\State{$\pi[v]\leftarrow u$}
+						\State{$\mathcal{F}.\tw{decrease\_key}(v,\mathcal{L}[v])$}
+					\EndIf
+				\EndFor
+				\If{$u==s$}
+					\ForAll{$v\in u.\tw{AdjLst}$}
+						\If{$\mathcal{L}[v]>w(u,v)$}
+							\State{$\mathcal{L}[v]\leftarrow w(u,v)$}
+							\State{$\pi[v]\leftarrow u$}
+							\State{$\mathcal{F}.\tw{decrease\_key}(v,\mathcal{L}[v])$}
+						\EndIf
+					\EndFor
+				\EndIf
+			\EndWhile
+			\State{\Return{$\mathcal{P},\pi$}}
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}

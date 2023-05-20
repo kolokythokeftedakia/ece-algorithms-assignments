@@ -1,0 +1,46 @@
+\documentclass{standalone}
+\usepackage{amsmath,amsfonts,amssymb,mathtools,xfrac}
+\usepackage{tabularx,longtable,multirow,subfigure,caption}
+\usepackage[english,main=greek]{babel}
+\usepackage[LGR]{fontenc}
+\usepackage{fontspec}
+\usepackage[normalize-symbols]{textalpha}
+\usepackage{unicode-math}
+\setmathfont{Concrete-Math.otf}
+\setmainfont{GFS NeoHellenic}
+\usepackage{algorithm,algpseudocode}
+\usepackage{tikz}
+
+\begin{document}
+\begin{algorithm}
+	\caption{Based on Dijkstra's algorithm}\label{alg:1_1}
+	\footnotesize{\texttt{\begin{algorithmic}[1]
+		\Procedure{MAXPP}{$G=(V,E)$, $\typeID{vertex}\;s$, $\typeID{vertex}\;t$, $w:E\to[0,1]$}
+			\ForAll{$e\in E$}
+				\State{$w(e)\leftarrow 1.0-w(e)$}
+			\EndFor
+			\State{$\typeID{FibonacciHeap}\;\mathcal{F}\leftarrow\emptyset$}
+			\State{$\typeID{array}\;\mathcal{P}\leftarrow\emptyset$}
+			\State{$\typeID{array}\;\mathcal{L}\leftarrow\emptyset\cdot|V|$}
+			\State{$\mathcal{L}[s]\leftarrow 0$}
+			\ForAll{$v\in V-\{s\}$}
+				\State{$\mathcal{L}[v]\leftarrow 1.0$}
+			\EndFor
+			\ForAll{$v\in V$}
+				\State{$\mathcal{F}.\tw{insert}(v,\mathcal{L}[v])$}
+			\EndFor
+			\While{$t\notin \mathcal{P}$}
+				\State{$u\leftarrow \mathcal{F}.\tw{extract\_min()}$}
+				\State{$\mathcal{P}.\tw{append}(u)\quad\quad//\;\mathcal{P}\leftarrow\mathcal{P}\cup\{u\}$}
+				\ForAll{$v\in u.\tw{AdjacencyList}$}
+					\If{$\mathcal{L}[v]>\mathcal{L}[u]\cdot w(u,v)$}
+						\State{$\mathcal{L}[v]\leftarrow \mathcal{L}[u]\cdot w(u,v)$}
+						\State{$\mathcal{F}.\tw{decrease\_key}(v,\mathcal{L}[v])$}
+					\EndIf
+				\EndFor
+			\EndWhile
+			\State{\Return{$\mathcal{P}$}}
+		\EndProcedure
+	\end{algorithmic}}}
+\end{algorithm}
+\end{document}
