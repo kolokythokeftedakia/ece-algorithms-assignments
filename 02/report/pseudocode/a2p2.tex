@@ -1,4 +1,4 @@
-\vspace*{-11pt}
+% \vspace*{-11pt}
 \begin{algorithm}[H]
 	\caption{The procedure takes as input an array $p$ of size $n$ containing the expected profit of each of the possible locations, an array $m$ of size $n$ containing the distance of each possible location from a fixed origin point and a positive real constant $k$.}\label{alg:2_2}
 	\begin{algorithmic}[1]
@@ -11,7 +11,8 @@
 			\For{$i=[2,n]$}
 				\For{$j=[1,i)$}
 					\If{$m[i]-m[j]\geqslant k$}
-						\State{$R[i]\gets \max{\left\{p[i], R[j]+p[i]\right\}}$}
+						% \State{$R[i]\gets \max{\left\{p[i], R[j]+p[i]\right\}}$}
+						\State{$R[i]\gets R[j]+p[i]$}
 					\Else
 						\State{$R[i]\gets \max{\left\{R[i], R[j]\right\}}$}
 					\EndIf

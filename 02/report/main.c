@@ -44,8 +44,10 @@ int * restaurant(int p[], int m[]){
 
 	for(i=2; i<=n; i++){
 		for(j=1; j<i; j++){
-			if(m[i]-m[j]>=k)
-				revenue[i]=max(p[i], revenue[j]+p[i]);
+			if(m[i]-m[j]>=k){
+				// revenue[i]=max(p[i], revenue[j]+p[i]);
+				revenue[i]=revenue[j]+p[i];
+				}
 			else
 				revenue[i]=max(revenue[i], revenue[j]);
 		}
