@@ -1,45 +1,45 @@
-\vspace*{-11pt}
+%\vspace*{-11pt}
 \begin{algorithm}[H]
 	\caption{The algorithm is based on the implementation of Dijkstra's algorithm by T. H. Cormen and C. E. Leiserson and R. L. Rivest and C. Stein.\cit{handbook}}\label{alg:2_1}
 	\begin{algorithmic}[1]
 		\Procedure{MAXPP}{$G,s,t,w$}
-			\ForAll{$e\in E$}
-				\State{$w(e)\leftarrow 1.0-w(e)$}
-			\EndFor
-			\State{$\typeID{FibonacciHeap}\;\mathcal{F}\leftarrow\emptyset$}
+			%\ForAll{$e\in E$}
+			%	\State{$w(e)\leftarrow 1.0-w(e)$}
+			%\EndFor
+			\State{$\typeID{MaxQueue}\;{Q}\leftarrow\emptyset$}\Comment{maximum priority queue}
 			\State{$\typeID{array}\;\mathcal{P}\leftarrow\emptyset$}
 			\State{$\typeID{array}\;\pi\leftarrow\emptyset\cdot|V|$}
-			\State{$\typeID{array}\;\mathcal{L}\leftarrow\emptyset\cdot|V|$}
+			\State{$\typeID{array}\;\mathcal{D}\leftarrow\emptyset\cdot|V|$}
 			\State{$\pi [s]\leftarrow \nil$}
-			\State{$\mathcal{L}[s]\leftarrow 0$}
+			\State{$\mathcal{D}[s]\leftarrow 1.0$}
 			\ForAll{$v\in V-\{s\}$}
 				\State{$\pi[v]\leftarrow \nil$}
-				\State{$\mathcal{L}[v]\leftarrow 1.0$}
+				\State{$\mathcal{D}[v]\leftarrow 0$}
 			\EndFor
 			\ForAll{$v\in V$}
-				\State{$\mathcal{F}.\tw{insert}(v,\mathcal{L}[v])$}
+				\State{$\tw{insert}(Q,v,\mathcal{D}[v])$}
 			\EndFor
-			\While{$\mathcal{F}\neq\emptyset$}
-				\State{$u\leftarrow \mathcal{F}.\tw{extract\_min()}$}
-				\State{$\mathcal{P}\leftarrow\mathcal{P}\cup\{u\}$}
-				\ForAll{$v\in u.\tw{AdjLst}\;\AND\;u\neq s$}
-					\If{$\mathcal{L}[v]>\mathcal{L}[u]\cdot w(u,v)$}
-						\State{$\mathcal{L}[v]\leftarrow \mathcal{L}[u]\cdot w(u,v)$}
-						\State{$\pi[v]\leftarrow u$}
-						\State{$\mathcal{F}.\tw{decrease\_key}(v,\mathcal{L}[v])$}
-					\EndIf
-				\EndFor
-				\If{$u==s$}
-					\ForAll{$v\in u.\tw{AdjLst}$}
-						\If{$\mathcal{L}[v]>w(u,v)$}
-							\State{$\mathcal{L}[v]\leftarrow w(u,v)$}
-							\State{$\pi[v]\leftarrow u$}
-							\State{$\mathcal{F}.\tw{decrease\_key}(v,\mathcal{L}[v])$}
-						\EndIf
-					\EndFor
-				\EndIf
+			\While{$Q\neq\empty$}
+   				\State{$u\gets\tw{extract\_max}\(Q\)$}
+                %\State{$\mathcal{P}\gets\mathcal{P}\cup\{u\}$}
+                \ForAll{$v\in\tw{AdjLst}[u]$}
+                    \If{$\mathcal{D}[v]<\mathcal{D}[u]\cdot w(u,v)$}
+                        \State{$\mathcal{D}[v]\gets\mathcal{D}[u]\cdot w(u,v)$}
+                        \State{$\tw{update\_priority}\(Q,v,\mathcal{D}[v]\)$}
+                        \State{$\pi[v]\gets u$}
+                    \EndIf
+                \EndFor
 			\EndWhile
-			\State{\Return{$\mathcal{P},\pi$}}
+			\If{$\pi[t]=\nil$}
+   				\State{\Return{The requested path does not exist.}}
+       		\EndIf
+         	\State{$\mathcal{P}\gets\mathcal{P}\cup\{t\}$}
+    		\State{$\typeID{int}\;i\gets -1$}
+          	\While{$\pi[\mathcal{P}[i]]\neq\nil$}
+           		\State{$\mathcal{P}[i-1]\gets\pi[\mathcal{P}[i]]$}
+           		\State{$i\gets i-1$}
+            \EndWhile
+			\State{\Return{$\mathcal{P}$}}
 		\EndProcedure
 	\end{algorithmic}
 \end{algorithm}
